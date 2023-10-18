@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"  th:debug="true"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/main}">
+<body>
+<div layout:fragment="content">
+
+    <div class="container mt-3 col-12">
+        <div class="row col-md-10 mb-3">
+            <h2>List of Employee</h2>
+        </div>
+
+        <table class="table table-striped">
+            <thead class="text-center">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Active Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="userDto : ${listUserDto}" class="text-center">
+                <th:block th:if="${userDto.roleType == 3}">
+                    <td th:text="${userDto.firstName}"></td>
+                    <td th:text="${userDto.lastName}"></td>
+                    <td th:text="${userDto.email}"></td>
+                    <td th:text="${userDto.phone}"></td>
+                    <td>
+                        <span th:text="${userDto.activeStatus ? 'ON' : 'OFF'}"
+                        th:class="${userDto.activeStatus ? 'active-status-on' : 'active-status-off'}">
+                        </span>
+                    </td>
+                    <div sec:authorize="hasRole('ROLE_MASTER')">
+                        <td>
+                            <a th:href="@{/user/change-status(id=${userDto.id})}" >
+                                <button class="btn button1">
+                                    <i class="fa-solid fa-wrench"></i>
+                                    Change Active Status
+                                </button>
+                            </a>
+                            <a th:href="@{/user/show-edit/{id}(id=${userDto.id})}" >
+                                <button class="btn button2">
+                                    <i class="fa-solid fa-pen"></i>
+                                    Update Information
+                                </button>
+                            </a>
+                        </td>
+                    </div>
+                    <div sec:authorize="hasRole('ROLE_HOTEL_ADMIN')">
+                        <td>
+                            <a th:href="@{/hotel/change-employee-status(employee_id=${userDto.id},hotel_id=${hotelId})}" >
+                                <button class="btn button1">
+                                    <i class="fa-solid fa-wrench"></i>
+                                    Change Active Status
+                                </button>
+                            </a>
+                            <a th:href="@{/hotel/show-employee-edit(employee_id=${userDto.id},hotel_id=${hotelId})}" >
+                                <button class="btn button2">
+                                    <i class="fa-solid fa-pen"></i>
+                                    Update Information
+                                </button>
+                            </a>
+                        </td>
+                    </div>
+                </th:block>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row mt-5">
+            <div class="col-12">
+                <nav aria-label="Page navigation" class="paging" style="float: right">
+                    <ul class="pagination">
+                        <li class="page-item" th:classappend="${pageUser.first ? 'disabled' : ''}">
+                    <span class="page-link" th:if="${pageUser.first}">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </span>
+                            <a th:if="${!pageUser.first}" class="page-link" th:href="@{/hotel/list-employee(hotel_id=${hotelId}, page=${pageUser.number - 1})}">
+                                <i class="fa-solid fa-angle-left"></i>
+                            </a>
+                        </li>
+                        <li th:each="i : ${#numbers.sequence(0, pageUser.totalPages - 1)}" class="page-item" th:classappend="${i == pageUser.number ? 'active' : ''}">
+                    <span class="page-number">
+                        <a th:if="${i != pageUser.number}" class="page-link" th:href="@{/hotel/list-employee(hotel_id=${hotelId}, page=${i})}" th:text="${i + 1}"></a>
+                        <span th:if="${i == pageUser.number}" class="page-link" th:text="${i + 1}"></span>
+                    </span>
+                        </li>
+                        <li class="page-item" th:classappend="${pageUser.last ? 'disabled' : ''}">
+                    <span class="page-link" th:if="${pageUser.last}">
+                        <i class="fa-solid fa-angle-right"></i>
+                    </span>
+                            <a th:if="${!pageUser.last}" class="page-link" th:href="@{/hotel/list-employee(hotel_id=${hotelId}, page=${pageUser.number + 1})}">
+                                <i class="fa-solid fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

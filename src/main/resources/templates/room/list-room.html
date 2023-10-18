@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main}">
+<body>
+<div layout:fragment="content">
+    <div class="row justify-content-start pl-4 pb-4">
+        <h3><b>List Room</b></h3>
+    </div>
+        <div class="container bg-light p-5 col-12">
+        <table class="table table-striped">
+            <thead style="background-color: #009688; color: white; text-align: center">
+            <tr>
+                <th>No</th>
+                <th>Image Room</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Maintained</th>
+                <th>Max Capacity</th>
+                <th>Hotel</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="room:${listRoom}" class="text-center">
+                <td th:utext="${room.roomId}"></td>
+                <td>
+                    <div id="imageSlider" class="carousel slide carousel-fade" data-ride="carousel">
+                        <!-- Slides -->
+                        <div class="carousel-inner">
+                            <div th:each="image, status : ${room.imageList  }" th:classappend="${status.index == 0} ? 'carousel-item active' : 'carousel-item'">
+                                <div class="img-container">
+                                    <img class="d-inline-block" th:src="${image.imageFirebaseUrl}" alt="Room Image" style="width: 90px" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td th:utext="${room.roomName}"></td>
+                <td th:utext="${room.roomType}"></td>
+                <td th:utext="${room.price}"></td>
+                <td th:utext="${room.description}"></td>
+                <td>
+                    <input type="checkbox" th:checked="${room.isMaintained}" disabled>
+                </td>
+                <td th:utext="${room.maxCapacity}"></td>
+                <td th:utext="${room.hotel.hotelName}"></td>
+                <td>
+                    <a th:href="@{/room/update/{id}(id=${room.roomId})}">
+                        <span class="" style="color: #FAB95B;margin-right: 10px;cursor: pointer;"><i class="fa-solid fa-pen-to-square"></i></span>
+                    </a>
+                    <a th:href="@{/room/delete/{id}(id=${room.roomId},hotelId=${hotel.hotelId})}">
+                        <span onclick="confirm('Do you wanna delete this room??')" class="" style="color: red; cursor: pointer;"><i class="fa-solid fa-trash-can"></i></span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

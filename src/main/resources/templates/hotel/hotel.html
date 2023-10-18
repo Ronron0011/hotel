@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main}">
+<body>
+<div class="mt-4 ml-5" layout:fragment="content">
+    <div class="row">
+        <div class="col-6">
+            <h3><b style="font-family: 'Helvetica Neue'">Hotel Detail</b></h3>
+        </div>
+        <div class="col-6">
+            <div class="row justify-content-end">
+                <a th:href="@{/room/list-room/{id}(id=${hotel.hotelId})}">
+                    <button class="btn btn-primary mr-2"><i class="fas fa-key"></i> List Room</button>
+                </a>
+                <a th:href="@{/service/list-service/{id}(id=${hotel.hotelId})}">
+                    <button class="btn btn-primary mr-2"><i class="fa-solid fa-list-check"></i> List Service</button>
+                </a>
+                <a th:href="@{/hotel/list-employee(hotel_id =${hotel.hotelId})}">
+                    <button class="btn btn-primary mr-4"><i class="fas fa-user-friends"></i> List Employee</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="imageSlider" class="carousel slide mb-5" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li th:each="image, status : ${hotel.listImagesHotel}" data-target="#imageSlider" th:attr="data-slide-to=${status.index}" th:classappend="${status.index == 0} ? 'active' : ''" ></li>
+        </ol>
+
+        <!-- Slides -->
+        <div class="carousel-inner">
+            <div th:each="image, status : ${hotel.listImagesHotel}" th:classappend="${status.index == 0} ? 'carousel-item active' : 'carousel-item'">
+                <div class="img-container">
+                    <img th:src="${image.imageFirebaseUrl}" alt="Service Image" class="d-block w-100 fixed-size-image"/>
+                </div>
+            </div>
+        </div>
+        <!-- Controls -->
+        <a class="carousel-control-prev" href="#imageSlider" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#imageSlider" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+  <div class="justify-content-center row mt-4">
+
+    <form class="w-50 ml-2 col-10" th:object="${hotel}" method="post">
+      <div class="d-flex justify-content-evenly">
+       <div class="form-group row w-75">
+
+             <label><b>Hotel Name</b> <span style="color: red">*</span></label>
+             <input type="text" class="form-control mr-2" placeholder="Hotel Name" th:value="${hotel.hotelName}" readonly style="border-radius: 8px">
+
+       </div>
+
+        <div class="form-group row w-75">
+
+               <label><b>Hotel Type</b> <span style="color: red">*</span></label>
+              <input type="text" class="form-control" placeholder="Hotel Type" th:value="${hotel.hotelType}" readonly style="border-radius: 8px">
+
+
+        </div>
+      </div>
+       <div class="form-group row">
+           <label><b>Hotel Star Level</b> <span style="color: red">*</span></label>
+           <input type="text" class="form-control" placeholder="Hotel Type" th:value="${hotel.hotelStarLevel}" readonly style="border-radius: 8px">
+
+       </div>
+
+      <div class="form-group row">
+
+          <label><b>Address</b> <span style="color: red">*</span></label>
+          <input type="text" class="form-control" placeholder="Address" th:value="${hotel.address}" readonly style="border-radius: 8px">
+
+      </div>
+      <div class="d-flex justify-content-evenly">
+          <div class="form-group row w-75" >
+
+              <label><b>Ward</b> <span style="color: red">*</span></label>
+              <input type="text" class="form-control mr-2" placeholder="City" th:value="${hotel.ward}" readonly style="border-radius: 8px">
+
+          </div>
+          <div class="form-group row w-75" >
+
+              <label><b>District</b> <span style="color: red">*</span></label>
+              <input type="text" class="form-control mr-2" placeholder="City" th:value="${hotel.district}" readonly style="border-radius: 8px">
+
+          </div>
+      <div class="form-group row w-75" >
+
+             <label><b>City</b> <span style="color: red">*</span></label>
+             <input type="text" class="form-control mr-2" placeholder="City" th:value="${hotel.city}" readonly style="border-radius: 8px">
+
+      </div>
+
+      <div class="form-group row w-75">
+
+          <label><b>Country</b> <span style="color: red">*</span></label>
+          <input type="text" class="form-control" placeholder="Country" th:value="${hotel.country}" readonly style="border-radius: 8px">
+
+      </div>
+      </div>
+      <div class="form-group row">
+
+          <label><b>Description</b></label>
+          <textarea class="form-control" th:field="${hotel.description}" readonly rows="5" style="border-radius: 8px"></textarea>
+
+      </div>
+    </form>
+  </div>
+    <div class="button-group d-flex justify-content-center">
+        <div class="button__add-room">
+            <a class="row justify-content-center" th:href="@{/room/add-room(hotel_id=${hotel.hotelId})}">
+                <button class="btn btn-primary mr-4">Add Room</button>
+            </a>
+        </div>
+        <div class="button__add-service">
+            <a class="row justify-content-center" th:href="@{/service/add-service(hotel_id=${hotel.hotelId})}">
+                <button class="btn btn-primary mr-4">Add Service</button>
+            </a>
+        </div>
+        <div class="button__add-facilities">
+            <a class="row justify-content-center" th:href="@{/facilities/add-facilities(hotel_id=${hotel.hotelId})}">
+                <button class="btn btn-primary mr-4">Add Facilities</button>
+            </a>
+        </div>
+        <div class="button__update-hotel">
+            <a class="row justify-content-center" th:href="@{/hotel/update-hotel(hotel_id=${hotel.hotelId})}">
+                <button class="btn btn-primary mr-4">Update Hotel</button>
+            </a>
+        </div>
+        <div class="button__update-hotel">
+            <a class="row justify-content-center" th:href="@{/user/show-add/{id}(id=${hotel.hotelId})}">
+                <button class="btn btn-primary mr-4">Employee Create</button>
+            </a>
+        </div>
+        <div class="button__add-image">
+            <a class="row justify-content-center" th:href="@{/image/add-image-hotel/{id}(id=${hotel.hotelId})}">
+                <button class="btn btn-primary ">Add Image</button>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

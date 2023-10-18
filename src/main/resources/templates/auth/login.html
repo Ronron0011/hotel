@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		  integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+		  crossorigin="anonymous" referrerpolicy="no-referrer"/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/login.css}">
+	<!-- Include your CSS or style references here -->
+</head>
+<body>
+<div id="login-box">
+	<div class="left-box">
+		<form class="form_main" th:action="@{/login}" th:object="${login}" method="post" onsubmit="rememberMe()">
+			<div th:if="${param.error}">
+				<p class="text-danger w-100 text-center m-2">Your Email or Password is not correct!</p>
+			</div>
+			<p class="heading">Login</p>
+			<div class="inputContainer">
+				<i class="fa-solid fa-envelope inputIcon"></i>
+				<input type="email"  th:field="*{email}" class="inputField" id="email" placeholder="Email">
+			</div>
+			<div class="inputContainer">
+				<i class="fa-solid fa-lock inputIcon"></i>
+				<input type="password" class="inputField" id="password" placeholder="Password" th:field="*{password}">
+				<i class="fa-solid fa-eye-slash" id="eysPassword" style="margin-left: -30px; cursor: pointer"></i>
+			</div>
+			<div class="checkboxs">
+				<div>
+					<input type="checkbox" class="check"  id="rememberCheck"  name="rememberMe">
+				</div>
+				<div>
+					<label>Remember me </label>
+				</div>
+
+			</div>
+			<button type="submit" id="button">Login</button>
+			<p class="forgotLink">No account? <a th:href="@{/register}">Register Account</a> </p>
+		</form>
+
+	</div>
+
+	<div class="right-box">
+	</div>
+</div>
+
+	<script>
+		const togglePassword = document.querySelector("#eysPassword");
+		const password = document.querySelector("#password");
+
+		togglePassword.addEventListener("click", function () {
+
+			const type = password.getAttribute("type") === "password" ? "text" : "password";
+			password.setAttribute("type", type);
+
+			this.classList.toggle("fa-eye");
+		});
+
+		const rememberCheck = document.getElementById('rememberCheck');
+		const emailInput = document.getElementById('email');
+
+
+		rememberCheck.checked = localStorage.getItem('rememberMe') === 'true';
+		rememberCheck.addEventListener('change', function() {
+			localStorage.setItem('rememberMe', rememberCheck.checked);
+			if (rememberCheck.checked) {
+				localStorage.setItem('email', emailInput.value);
+			} else {
+				localStorage.removeItem('email');
+			}
+		});
+		window.addEventListener('load', function() {
+			const savedEmail = localStorage.getItem('email');
+			if (savedEmail) {
+				emailInput.value = savedEmail;
+			}
+		});
+
+	</script>
+
+</body>
+</html>

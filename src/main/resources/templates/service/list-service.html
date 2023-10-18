@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main}">
+<body>
+<div layout:fragment="content">
+    <div class="container bg-light p-5 col-12">
+        <table class="table table-striped">
+            <thead style="background-color: #009688; color: white; text-align: center">
+            <tr>
+                <th>No</th>
+                <th>Image Service</th>
+                <th>Service Name</th>
+                <th>Unity</th>
+                <th>Price</th>
+                <th>Hotel Name</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="service:${listServiceHotel}" class="text-center">
+                <td th:utext="${service.serviceHotelId}"></td>
+                <td>
+                    <div id="imageSlider" class="carousel slide" data-ride="carousel">
+                        <!-- Slides -->
+                        <div class="carousel-inner">
+                            <div th:each="image, status : ${service.imageList}" th:classappend="${status.index == 0} ? 'carousel-item active' : 'carousel-item'">
+                                <div class="img-container">
+                                    <img th:src="${image.imageFirebaseUrl}" alt="Service Image" style="width: 50px" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td th:utext="${service.serviceHotelName}"></td>
+                <td th:utext="${service.unity}"></td>
+                <td th:utext="${service.price}"></td>
+                <td th:utext="${service.hotel.hotelName}"></td>
+                <td>
+                    <a th:href="@{/service/update-service/{id}(id=${service.serviceHotelId})}">
+                        <span class="" style="color: #FAB95B;margin-right: 10px;cursor: pointer;"><i class="fa-solid fa-pen-to-square"></i></span>
+                    </a>
+                    <a th:href="@{/service/delete-service/{id}(id=${service.serviceHotelId},hotelId=${hotel.hotelId})}">
+                        <span onclick="confirm('Do you wanna delete this service??')" class="" style="color: red; cursor: pointer;"><i class="fa-solid fa-trash-can"></i></span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

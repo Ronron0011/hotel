@@ -1,0 +1,43 @@
+.active-status-on {
+    background-color: #00DFA2;
+    color: white;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 3px 8px 5px 8px;
+}
+.active-status-off {
+    background-color: #F94A29;
+    color: white;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 3px 8px 5px 8px;
+}
+.table td {
+    vertical-align: 0;
+}
+.button1 {
+    background-color: #E86A33;
+    border: 1px solid #F94A29;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+.button2 {
+    background-color: #55ce63;
+    border: none;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+}
+.button2:hover , .button1:hover {
+    color: #102C57;
+
+}
+

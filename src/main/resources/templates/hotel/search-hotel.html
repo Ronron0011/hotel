@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main}">
+<body>
+<div layout:fragment="content">
+
+    <div class="row justify-content-center pb-4">
+        <h3><b style="font-family: 'Helvetica Neue'">List Hotel</b></h3>
+    </div>
+    <!--    begin list hotel admin-->
+    <!--  <div class="container bg-light p-3 col-12" sec:authorize="hasRole('HOTEL_ADMIN')">-->
+    <!--    <div class="row">-->
+    <!--      <div class="col-6">-->
+    <!--        &lt;!&ndash;                <div class="input-group w-50">&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    <div class="input-group-prepend">&ndash;&gt;-->
+    <!--        &lt;!&ndash;                        <label class="input-group-text"><i class="fas fa-filter"></i> Filter</label>&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    </div>&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    <div class="dropdown input-group-append">&ndash;&gt;-->
+    <!--        &lt;!&ndash;                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&ndash;&gt;-->
+    <!--        &lt;!&ndash;                            Status&ndash;&gt;-->
+    <!--        &lt;!&ndash;                        </button>&ndash;&gt;-->
+    <!--        &lt;!&ndash;                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">&ndash;&gt;-->
+    <!--        &lt;!&ndash;                            <a th:href="@{/hotel/list-hotel}"><button class="dropdown-item">All</button></a>&ndash;&gt;-->
+    <!--        &lt;!&ndash;                            <a th:href="@{/hotel/pending-hotel}"><button class="dropdown-item">Pending</button></a>&ndash;&gt;-->
+    <!--        &lt;!&ndash;                            <a th:href="@{/hotel/accepted-hotel}"><button class="dropdown-item">Accepted</button></a>&ndash;&gt;-->
+    <!--        &lt;!&ndash;                            <a th:href="@{/hotel/denied-hotel}"><button class="dropdown-item">Denied</button></a>&ndash;&gt;-->
+    <!--        &lt;!&ndash;                        </div>&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    </div>&ndash;&gt;-->
+    <!--        &lt;!&ndash;                </div>&ndash;&gt;-->
+    <!--      </div>-->
+    <!--      <div class="col-6">-->
+    <!--        <div class="row justify-content-end">-->
+    <!--          <a th:href="@{/hotel/add-hotel}">-->
+    <!--            <button class="btn btn-primary mb-3">-->
+    <!--              <i class="fas fa-plus"></i> <b>Add Hotel</b>-->
+    <!--            </button>-->
+    <!--          </a>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--    <table class="table table-striped">-->
+    <!--      <thead style="background-color: #009688; color: white; text-align: center">-->
+    <!--      <tr>-->
+    <!--        <th>No</th>-->
+    <!--        <th>Hotel Name</th>-->
+    <!--        <th>Type</th>-->
+    <!--        <th>Star</th>-->
+    <!--        <th>Address</th>-->
+    <!--        <th>City</th>-->
+    <!--        <th>Country</th>-->
+    <!--        <th>Status</th>-->
+    <!--        <th>Action</th>-->
+    <!--      </tr>-->
+    <!--      </thead>-->
+    <!--      <tbody>-->
+    <!--      <tr th:each="hotel:${adminHotel}" class="text-center">-->
+    <!--        <td  th:utext="${hotel.hotelId}"></td>-->
+    <!--        <td  th:utext="${hotel.hotelName}"></td>-->
+    <!--        <td  th:utext="${hotel.hotelType}"></td>-->
+    <!--        <td  th:utext="${hotel.hotelStarLevel}"></td>-->
+    <!--        <td  th:utext="${hotel.address}"></td>-->
+    <!--        <td  th:utext="${hotel.city}"></td>-->
+    <!--        <td  th:utext="${hotel.country}"></td>-->
+    <!--        <td  th:utext="${hotel.hotelStatus}"-->
+    <!--             th:style="${hotel.hotelStatus} == ${hotel.hotelStatus.ACCEPTED}-->
+    <!--                     ? 'color: #5bb965;font-weight: 600;' : 'color: red;font-weight: 600;'">-->
+
+    <!--        </td>-->
+    <!--        <td class="d-flex justify-content-center">-->
+    <!--          <a sec:authorize="hasRole('HOTEL_ADMIN')"-->
+    <!--             th:if="${hotel.hotelStatus} == ${hotel.hotelStatus.ACCEPTED}"-->
+    <!--             th:href="@{/hotel/detail/{id}(id=${hotel.hotelId})}">-->
+    <!--            <span class=""><i class="fa-solid fa-eye"></i></span>-->
+    <!--          </a>-->
+    <!--          <a sec:authorize="hasRole('HOTEL_ADMIN')"-->
+    <!--             th:if="${hotel.hotelStatus} == ${hotel.hotelStatus.DENIED}"-->
+    <!--             th:href="@{/hotel/delete/{id}(id=${hotel.hotelId})}">-->
+    <!--            <span onclick="confirm('Do you wanna delete?')" class="" style="color: red"><i class="fa-solid fa-trash-can"></i></span>-->
+    <!--          </a>-->
+    <!--        </td>-->
+    <!--      </tr>-->
+    <!--      </tbody>-->
+    <!--    </table>-->
+
+    <!--    <div class="row mt-5" >-->
+    <!--      <div class="col-12">-->
+    <!--        <nav aria-label="Page navigation" class="paging" style="float: right">-->
+    <!--          <ul class="pagination">-->
+    <!--            <li class="page-item" th:classappend="${pageAdmin.first ? 'disabled' : ''}">-->
+    <!--                        <span class="page-link" th:if="${pageAdmin.first}">-->
+    <!--                            <i class="fa-solid fa-angle-left"></i>-->
+    <!--                        </span>-->
+    <!--              <a th:if="${!pageAdmin.first}" class="page-link" th:href="@{/hotel/list-hotel(page=${pageAdmin.number})}">-->
+    <!--                <i class="fa-solid fa-angle-left"></i>-->
+    <!--              </a>-->
+    <!--            </li>-->
+    <!--            <li th:each="i : ${#numbers.sequence(1, pageAdmin.totalPages)}" class="page-item" th:classappend="${i == (pageAdmin.number + 1) ? 'active' : ''}">-->
+    <!--                        <span class="page-number">-->
+    <!--                            <a th:if="${i + 1 != pageAdmin.number}" class="page-link" th:href="@{/hotel/list-hotel(page=${i})}" th:text="${i}"></a>-->
+    <!--                            <span th:if="${i + 1 == pageAdmin.number}" class="page-link" th:text="${i}"></span>-->
+    <!--                        </span>-->
+    <!--            </li>-->
+    <!--            <li class="page-item" th:classappend="${pageAdmin.last ? 'disabled' : ''}">-->
+    <!--                        <span class="page-link" th:if="${pageAdmin.last}">-->
+    <!--                            <i class="fa-solid fa-angle-right"></i>-->
+    <!--                        </span>-->
+    <!--              <a th:if="${!pageAdmin.last}" class="page-link" th:href="@{/hotel/list-hotel(page=${pageAdmin.number + 2})}">-->
+    <!--                <i class="fa-solid fa-angle-right"></i>-->
+    <!--              </a>-->
+    <!--            </li>-->
+    <!--          </ul>-->
+    <!--        </nav>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <!--    end list hotel admin-->
+
+    <!--    begin list hotel master-->
+    <div class="container bg-light p-3 col-12" sec:authorize="hasRole('MASTER')">
+        <div class="row">
+            <div class="col-6">
+                <div class="input-group w-50">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-filter"></i>
+                            Filter
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <a th:href="@{/hotel/list-hotel(status = 'all')}"><button class="dropdown-item">All</button></a>
+                            <a th:href="@{/hotel/list-hotel(status = 'pending')}"><button class="dropdown-item">Pending</button></a>
+                            <a th:href="@{/hotel/list-hotel(status = 'accepted')}"><button class="dropdown-item">Accepted</button></a>
+                            <a th:href="@{/hotel/list-hotel(status = 'deny')}"><button class="dropdown-item">Denied</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row justify-content-end">
+                    <form th:action="@{/hotel/search}" class="form-inline mb-3" method="get">
+                        <div class="input-group">
+                            <input type="text" name="keyword" th:value="${keyword}" class="form-control" placeholder="Search by Hotel Name" size="40">
+                        </div>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div th:if="error != null"
+                 th:text="${error} + ${keyword} + ' - did not return any results!'"
+                 th:attr="class=${error != null ? 'w-100 text-danger mb-3 text-center' : 'text-hide'}">
+                <div class="w-100 text-danger mb-3 text-center"></div>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead style="background-color: #009688; color: white; text-align: center">
+            <tr>
+                <th>No</th>
+                <th>Hotel Name</th>
+                <th>Type</th>
+                <th>Star</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="hotel:${masterHotel}" class="text-center">
+                <td  th:utext="${hotel.id}"></td>
+                <td  th:utext="${hotel.name}"></td>
+                <td  th:utext="${hotel.type}"></td>
+                <td  th:utext="${hotel.starLevel}"></td>
+                <td  th:utext="${hotel.address}"></td>
+                <td  th:utext="${hotel.city}"></td>
+                <td  th:utext="${hotel.country}"></td>
+                <td  th:utext="${hotel.status}"
+                     th:style="${hotel.status} == ${hotel.status.ACCEPTED}
+                     ? 'color: #5bb965;font-weight: 600;' : 'color: red;font-weight: 600;'">
+
+                </td>
+                <td class="d-flex justify-content-center">
+                    <a sec:authorize="hasRole('MASTER')"
+                       th:if="${hotel.status} == ${hotel.status.PENDING}"
+                       th:href="@{/hotel/change-status-accepted/{id}(id=${hotel.id},page=${pageAdmin.number},status=null)}">
+                        <button class="btn btn-outline-success btn-sm"><i class="fas fa-check"></i></button>
+                    </a>
+                    <a sec:authorize="hasRole('MASTER')"
+                       th:if="${hotel.status} == ${hotel.status.PENDING}"
+                       th:href="@{/hotel/change-status-deny/{id}(id=${hotel.id},page=${pageAdmin.number},status=null)}">
+                        <button class="btn btn-outline-danger btn-sm"><i class="fas fa-times"></i></button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="row mt-5" >
+            <div class="col-12">
+                <nav aria-label="Page navigation" class="paging" style="float: right">
+                    <ul class="pagination">
+                        <li class="page-item" th:classappend="${pageMaster.first ? 'disabled' : ''}">
+                        <span class="page-link" th:if="${pageMaster.first}">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </span>
+                            <a th:if="${!pageMaster.first}" class="page-link" th:href="@{/hotel/search(page=${pageMaster.number - 1},keyword=${keyword})}">
+                                <i class="fa-solid fa-angle-left"></i>
+                            </a>
+                        </li>
+                        <li th:each="i : ${#numbers.sequence(0, pageMaster.totalPages - 1)}" class="page-item" th:classappend="${i == (pageMaster.number) ? 'active' : ''}">
+                        <span class="page-number">
+                            <a th:if="${i != pageMaster.number}" class="page-link" th:href="@{/hotel/search(page=${i},keyword=${keyword})}" th:text="${i + 1}"></a>
+                            <span th:if="${i == pageMaster.number}" class="page-link" th:text="${i + 1}"></span>
+                        </span>
+                        </li>
+                        <li class="page-item" th:classappend="${pageMaster.last ? 'disabled' : ''}">
+                        <span class="page-link" th:if="${pageMaster.last}">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </span>
+                            <a th:if="${!pageMaster.last}" class="page-link" th:href="@{/hotel/search(page=${pageMaster.number + 1},keyword=${keyword})}">
+                                <i class="fa-solid fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

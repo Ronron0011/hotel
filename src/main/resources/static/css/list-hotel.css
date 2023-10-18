@@ -1,0 +1,15 @@
+.page-link {
+    color: #007bff;
+}
+
+.pagination {
+    justify-content: center;
+}
+tbody td {
+
+    vertical-align: center;
+}
+tbody button {
+    margin: 8px;
+
+}

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <title>Hotel Management</title>
+
+  <!--	Bootstrap  -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />
+
+  <!--	Font awesome  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <link rel="stylesheet" th:href="@{/plugins/fontawesome/css/fontawesome.min.css}">
+  <link rel="stylesheet" th:href="@{/plugins/fontawesome/css/all.min.css}">
+
+  <!--	Css  -->
+  <link rel="stylesheet" th:href="@{/css/feathericon.min.css}">
+<!--  <link rel="stylesheet" href="https://cdn.oesmith.co.uk/morris-0.5.1.css">-->
+  <link rel="stylesheet" th:href="@{/plugins/morris/morris.css}">
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{/css/list-hotel.css}">
+  <link rel="stylesheet" th:href="@{/css/add-hotel.css}">
+  <link rel="stylesheet" th:href="@{/css/list-user.css}">
+  <link rel="stylesheet" th:href="@{/css/hotel-details.css}">
+</head>
+<body>
+<header class="header">
+  <div class="header-left">
+    <a th:href="@{/hotel/list-hotel}" class="logo"> <img src="https://images.shiksha.com/mediadata/images/articles/1661399579phpXyl5FL.jpeg" width="50" height="70" alt="logo"> <span class="logoclass">HOTEL MANAGEMENT</span> </a>
+    <a th:href="@{/hotel/list-hotel}" class="logo logo-small"> <img src="https://images.shiksha.com/mediadata/images/articles/1661399579phpXyl5FL.jpeg" alt="Logo" width="30" height="30"> </a>
+  </div>
+  <a href="javascript:void(0);" id="toggle_btn"> <i class="fe fe-text-align-left"></i> </a>
+  <a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
+  <ul class="nav user-menu">
+<!--    <li class="nav-item dropdown noti-dropdown">-->
+<!--      <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <i class="fe fe-bell"></i> <span class="badge badge-pill">3</span> </a>-->
+<!--      <div class="dropdown-menu notifications">-->
+<!--        <div class="topnav-dropdown-header"> <span class="notification-title">Notifications</span> <a href="javascript:void(0)" class="clear-noti"> Clear All </a> </div>-->
+<!--        <div class="noti-content">-->
+<!--          <ul class="notification-list">-->
+<!--            <li class="notification-message">-->
+<!--              <a href="#">-->
+<!--                <div class="media"> <span class="avatar avatar-sm">-->
+<!--											<img class="avatar-img rounded-circle" alt="User Image" src="/images/profiles/avatar-02.jpg">-->
+<!--											</span>-->
+<!--                  <div class="media-body">-->
+<!--                    <p class="noti-details"><span class="noti-title">Carlson Tech</span> has approved <span class="noti-title">your estimate</span></p>-->
+<!--                    <p class="noti-time"><span class="notification-time">4 mins ago</span> </p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li class="notification-message">-->
+<!--              <a href="#">-->
+<!--                <div class="media"> <span class="avatar avatar-sm">-->
+<!--											<img class="avatar-img rounded-circle" alt="User Image" src="/images/profiles/avatar-11.jpg">-->
+<!--											</span>-->
+<!--                  <div class="media-body">-->
+<!--                    <p class="noti-details"><span class="noti-title">International Software-->
+<!--													Inc</span> has sent you a invoice in the amount of <span class="noti-title">$218</span></p>-->
+<!--                    <p class="noti-time"><span class="notification-time">6 mins ago</span> </p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li class="notification-message">-->
+<!--              <a href="#">-->
+<!--                <div class="media"> <span class="avatar avatar-sm">-->
+<!--											<img class="avatar-img rounded-circle" alt="User Image" src="/images/profiles/avatar-17.jpg">-->
+<!--											</span>-->
+<!--                  <div class="media-body">-->
+<!--                    <p class="noti-details"><span class="noti-title">John Hendry</span> sent a cancellation request <span class="noti-title">Apple iPhone-->
+<!--													XR</span></p>-->
+<!--                    <p class="noti-time"><span class="notification-time">8 mins ago</span> </p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li class="notification-message">-->
+<!--              <a href="#">-->
+<!--                <div class="media"> <span class="avatar avatar-sm">-->
+<!--											<img class="avatar-img rounded-circle" alt="User Image" src="/images/profiles/avatar-13.jpg">-->
+<!--											</span>-->
+<!--                  <div class="media-body">-->
+<!--                    <p class="noti-details"><span class="noti-title">Mercury Software-->
+<!--												Inc</span> added a new product <span class="noti-title">Apple-->
+<!--												MacBook Pro</span></p>-->
+<!--                    <p class="noti-time"><span class="notification-time">12 mins ago</span> </p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--        <div class="topnav-dropdown-footer"> <a href="#">View all Notifications</a> </div>-->
+<!--      </div>-->
+<!--    </li>-->
+    <li class="nav-item dropdown has-arrow">
+      <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img class="rounded-circle" src="https://dg1xqmhtoint1.cloudfront.net/img/ihm/blog/hotel-management_210820_124019.webp?mtime=20220330100906&focal=none" width="31" alt="Soeng Souy"></span> </a>
+      <div class="dropdown-menu">
+        <div class="user-header">
+          <div class="avatar avatar-sm"> <img src="https://dg1xqmhtoint1.cloudfront.net/img/ihm/blog/hotel-management_210820_124019.webp?mtime=20220330100906&focal=none" alt="User Image" class="avatar-img rounded-circle"> </div>
+          <div class="user-text"  sec:authorize="isAuthenticated()">
+            <p class="text-muted mb-0" sec:authentication="name"></p>
+          </div>
+        </div>
+<!--        <a class="dropdown-item" href="profile.html">My Profile</a>-->
+<!--        <a class="dropdown-item"  sec:authorize="hasRole('MASTER')" th:href="@{/register}">Admin Registration</a>-->
+<!--        <a class="dropdown-item"  sec:authorize="hasRole('HOTEL_ADMIN')" th:href="@{/register}">Employee Registration</a>-->
+        <a class="dropdown-item" th:href="@{/login/logout}">Logout</a>
+      </div>
+    </li>
+  </ul>
+  <div class="top-nav-search">
+<!--    <form>-->
+<!--      <input type="text" class="form-control" placeholder="Search here">-->
+<!--      <button class="btn" type="submit"><i class="fas fa-search"></i></button>-->
+<!--    </form>-->
+  </div>
+</header>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-inner slimscroll">
+    <div id="sidebar-menu" class="sidebar-menu">
+      <ul>
+        <li class="active"> <a th:href="@{/dashboard}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a> </li>
+        <li class="list-divider"></li>
+<!--                <li> <a th:hreWf="@{/hotel/list-hotel}"><i class="fas fa-user-tie"></i> <span>Master</span></a> </li>-->
+        <li class="submenu"> <a href="#" sec:authorize="hasRole('MASTER')"><i class="fas fa-user-tie"></i> <span> Master </span> <span class="menu-arrow"></span></a>
+          <ul class="submenu_class" style="display: none;">
+            <li><a th:href="@{/hotel/list-hotel}"> List Hotel </a></li>
+          </ul>
+        </li>
+
+        <li class="submenu"> <a href="#" sec:authorize="hasRole('HOTEL_ADMIN')"><i class="fas fa-user"></i> <span>Management Hotel</span> <span class="menu-arrow"></span></a>
+          <ul class="submenu_class" style="display: none;">
+            <li><a th:href="@{/hotel/list-hotel}"> List Hotel </a></li>
+<!--            <li><a th:href="@{/hotel/pending-hotel}"> Pending Hotel </a></li>-->
+            <li><a th:href="@{/hotel/add-hotel}"> Add Hotel </a></li>
+<!--            <li> <a th:href="@{/room/list-room}" sec:authorize="hasRole('HOTEL_ADMIN')">List Room</a> </li>-->
+<!--            <li> <a th:href="@{/service/list-service}" sec:authorize="hasRole('HOTEL_ADMIN')">List Service</a></li>-->
+          </ul>
+        </li>
+
+<!--                <li class="submenu" > <a href="#"><i class="fas fa-user"></i><span>Management Employee</span><span class="menu-arrow"></span></a>-->
+<!--                  <ul class="submenu_class" style="display: none;">-->
+<!--                    <li><a href="edit-customer.html"> Edit Customer </a></li>-->
+<!--                    <li><a href="add-customer.html"> Add Customer </a></li>-->
+<!--                  </ul>-->
+<!--                </li>-->
+        <!--        <li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Rooms </span> <span class="menu-arrow"></span></a>-->
+        <!--          <ul class="submenu_class" style="display: none;">-->
+        <!--            <li><a href="all-rooms.html">All Rooms </a></li>-->
+        <!--            <li><a href="edit-room.html"> Edit Rooms </a></li>-->
+        <!--            <li><a href="add-room.html"> Add Rooms </a></li>-->
+        <!--          </ul>-->
+        <!--        </li>-->
+        <!--        <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Staff </span> <span class="menu-arrow"></span></a>-->
+        <!--          <ul class="submenu_class" style="display: none;">-->
+        <!--            <li><a href="all-staff.html">All Staff </a></li>-->
+        <!--            <li><a href="edit-staff.html"> Edit Staff </a></li>-->
+        <!--            <li><a href="add-staff.html"> Add Staff </a></li>-->
+        <!--          </ul>-->
+        <!--        </li>-->
+        <!--        <li> <a href="pricing.html"><i class="far fa-money-bill-alt"></i> <span>Pricing</span></a> </li>-->
+        <!--        <li class="submenu"> <a href="#"><i class="fas fa-share-alt"></i> <span> Apps </span> <span class="menu-arrow"></span></a>-->
+        <!--          <ul class="submenu_class" style="display: none;">-->
+        <!--            <li><a href="chat.html"><i class="fas fa-comments"></i><span> Chat </span></a></li>-->
+        <!--            <li class="submenu"> <a href="#"><i class="fas fa-video camera"></i> <span> Calls </span> <span class="menu-arrow"></span></a>-->
+        <!--              <ul class="submenu_class" style="display: none;">-->
+        <!--                <li><a href="voice-call.html"> Voice Call </a></li>-->
+        <!--                <li><a href="video-call.html"> Video Call </a></li>-->
+        <!--                <li><a href="incoming-call.html"> Incoming Call </a></li>-->
+        <!--              </ul>-->
+        <!--            </li>-->
+        <!--            <li class="submenu"> <a href="#"><i class="fas fa-envelope"></i> <span> Email </span> <span class="menu-arrow"></span></a>-->
+        <!--              <ul class="submenu_class" style="display: none;">-->
+        <!--                <li><a href="compose.html">Compose Mail </a></li>-->
+        <!--                <li><a href="inbox.html"> Inbox </a></li>-->
+        <!--                <li><a href="mail-veiw.html"> Mail Veiw </a></li>-->
+        <!--              </ul>-->
+        <!--            </li>-->
+        <!--          </ul>-->
+        <!--        </li>-->
+        <!--        <li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Employees </span> <span class="menu-arrow"></span></a>-->
+        <!--          <ul class="submenu_class" style="display: none;">-->
+        <!--            <li><a href="employees.html">Employees List </a></li>-->
+        <!--            <li><a href="leaves.html">Leaves </a></li>-->
+        <!--            <li><a href="holidays.html">Holidays </a></li>-->
+        <!--            <li><a href="attendance.html">Attendance </a></li>-->
+        <!--          </ul>-->
+        <!--        </li>-->
+        <!--        <li class="submenu"> <a href="#"><i class="far fa-money-bill-alt"></i> <span> Accounts </span> <span class="menu-arrow"></span></a>-->
+        <!--          <ul class="submenu_class" style="display: none;">-->
+        <!--            <li><a href="invoices.html">Invoices </a></li>-->
+        <!--            <li><a href="payments.html">Payments </a></li>-->
+        <!--            <li><a href="expenses.html">Expenses </a></li>-->
+        <!--            <li><a href="taxes.html">Taxes </a></li>-->
+        <!--            <li><a href="provident-fund.html">Provident Fund </a></li>-->
+        <!--          </ul>-->
+        <!--        </li>-->
+        <!--        <li class="submenu"> <a href="#"><i class="fas fa-book"></i> <span> Payroll </span> <span class="menu-arrow"></span></a>-->
+        <!--          <ul class="submenu_class" style="display: none;">-->
+        <!--            <li><a href="salary.html">Employee Salary </a></li>-->
+        <!--            <li><a href="salary-veiw.html">Payslip </a></li>-->
+        <!--          </ul>-->
+        <!--        </li>-->
+      </ul>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="page-wrapper">
+  <div class="content container-fluid" layout:fragment="content">
+
+  </div>
+</div>
+<!--<header>-->
+<!--  <nav class="navbar navbar-light bg-dark border p-0 h-100">-->
+<!--    <a class="navbar-brand pl-2 text-light" th:href="@{/hotel/list-hotel}"><i class="fa-solid fa-house"></i> Hotel Management</a>-->
+<!--    <div class="btn-group">-->
+<!--      <a class="nav-link" href="#" id="navbarDropdown"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--&lt;!&ndash;        <div sec:authorize="isAuthenticated()">&ndash;&gt;-->
+<!--&lt;!&ndash;          <button class="btn btn-dark" sec:authentication="name"></button>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div sec:authorize="!isAuthenticated()">&ndash;&gt;-->
+<!--          <a th:href="@{/auth/authenticate}">-->
+<!--            <button class="btn btn-dark mt-0">Login</button>-->
+<!--          </a>-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--      </a>-->
+<!--&lt;!&ndash;      <div class="dropdown-menu ml-5 mt-0" aria-labelledby="navbarDropdown">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div sec:authorize="isAuthenticated()">&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="dropdown-item" th:href="@{/auth/logout}">Đăng xuất</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    </div>-->
+<!--  </nav>-->
+<!--</header>-->
+
+<!--<div>-->
+<!--  <div class="container-fluid row bg-light">-->
+<!--    <div class="col-sm-3 main-left">-->
+<!--      <ul>-->
+<!--        <li>-->
+<!--          <h5>Tool Management</h5>-->
+<!--          <ul>-->
+
+<!--            <li>-->
+<!--              <a th:href="@{/hotel/list-hotel}"><i class="fa-solid fa-list"></i> List Hotel Of Master</a>-->
+<!--            </li>-->
+
+<!--            <li>-->
+<!--              <a th:href="@{/hotel/list-hotel-admin}"><i class="fa-solid fa-list"></i> List Hotel Of Admin</a>-->
+<!--            </li>-->
+
+<!--            <li>-->
+<!--              <a th:href="@{/hotel/pending-hotel}"><i class="fa-solid fa-list"></i> List Pending Hotel</a>-->
+<!--            </li>-->
+
+<!--            <li>-->
+<!--              <a th:href="@{/hotel/add-hotel}"><i class="fa-solid fa-plus"></i> Add Hotel</a>-->
+<!--            </li>-->
+
+<!--            <li>-->
+<!--              <a th:href="@{/room/list-room}"><i class="fa-solid fa-list"></i> List Room</a>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+
+<!--    <div class="col-sm-9 main-right">-->
+<!--      <div class="content" layout:fragment="content">-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--  JavaScript  -->
+<!--<script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>-->
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/plugins/raphael/raphael.min.js"></script>
+<script src="/plugins/morris/morris.min.js"></script>
+<script src="/js/chart.morris.js"></script>
+<script src="/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
+<script th:src="@{/js/list-service.js}"></script>
+
+
+<!--<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>-->
+<!--<script th:src="@{/js/bootstrap.min.js}"></script>-->
+
+<script>
+  $('.select2').select2({
+    // data: ["Wifi", "Parking Car", "Pool", "Buffet", "No-Smoking"],
+    tags: true,
+    maximumSelectionLength: 10,
+    tokenSeparators: [',', ' '],
+    placeholder: " Select or Type Facilities",
+  });
+
+  const selectCity = document.getElementById('city');
+  const selectDistrict = document.getElementById('districts');
+  const selectWards = document.getElementById('wards');
+  let data = []; // Declare a variable to store the fetched data
+
+  getDataAPI();
+
+  async function getDataAPI() {
+    try {
+      const responseApi = await fetch('/api/data');
+      data = await responseApi.json(); // Store the fetched data
+
+      data.forEach(city => {
+        const cityOption = document.createElement('option');
+        cityOption.innerHTML = city.name;
+        cityOption.value = city.name;
+        cityOption.className = city.codename;
+        selectCity.appendChild(cityOption);
+      });
+
+      selectCity.addEventListener('change', function () {
+        const selectedCityName = selectCity.value;
+        const selectedCity = data.find(city => city.name === selectedCityName);
+
+        selectDistrict.innerHTML = '';
+        selectWards.innerHTML = '';
+
+        if (selectedCity) {
+          selectedCity.districts.forEach(district => {
+            const districtOption = document.createElement('option');
+            districtOption.innerHTML = district.name;
+            districtOption.value = district.name;
+            districtOption.className = district.codename;
+            selectDistrict.appendChild(districtOption);
+          });
+        }
+      });
+
+      selectDistrict.addEventListener('change', function () {
+        const selectedDistrictName = selectDistrict.value;
+        const selectedCityName = selectCity.value;
+        const selectedCity = data.find(city => city.name === selectedCityName);
+
+        if (selectedCity) {
+          const selectedDistrict = selectedCity.districts.find(district => district.name === selectedDistrictName);
+
+          selectWards.innerHTML = '';
+
+          if (selectedDistrict) {
+            selectedDistrict.wards.forEach(ward => {
+              const wardOption = document.createElement('option');
+              wardOption.innerHTML = ward.name;
+              wardOption.value = ward.name;
+              wardOption.className = ward.codename;
+              selectWards.appendChild(wardOption);
+            });
+          }
+        }
+      });
+    } catch (error) {
+      console.error("fetch loi",error);
+    }
+  }
+
+</script>
+</body>
+</html>

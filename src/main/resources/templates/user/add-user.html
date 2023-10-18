@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main}">
+<body>
+<div class="mt-4 ml-5" layout:fragment="content">
+<div class="container">
+
+    <form id="createAccountForm" th:action="@{/user/add}" method="post" th:object="${data}">
+        <h2 class="text-center mb-3">Create Employee Hotel</h2>
+        <div class="col-6 border p-5 position-relative p-auto m-auto">
+            <a th:href="@{/hotel/detail(hotel_id=${hotel.hotelId})}" class="mb-4">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </a>
+        <div th:if="${error != null}" class="w-100 text-danger text-center">
+            <p th:text="${error}"></p>
+        </div>
+        <div class="w-100">
+            <label><b>Hotel Name</b></label>
+            <input type="hidden" th:value="${hotel.hotelId}" name="hotelId" class="form-control" readonly>
+            <input type="text" th:value="${hotel.hotelName}" name="hotelName" class="form-control" readonly>
+        </div>
+            <div class="d-flex justify-content-between">
+                <div class="form-group w-45">
+                    <label for="firstname">First Name:</label>
+                    <input th:field="*{firstName}"  type="text" class="form-control" id="firstname" name="firstname">
+                    <div class="w-100 mx-3 text-danger"
+                         th:if="${#fields.hasErrors('firstName')}"
+                         th:errors="*{firstName}">
+                    </div>
+                </div>
+                <div class="form-group w-50">
+                    <label for="lastname">Last Name:</label>
+                    <input th:field="*{lastName}" type="text" class="form-control" id="lastname" name="lastname">
+                    <div class="w-100 mx-3 text-danger"
+                         th:if="${#fields.hasErrors('lastName')}"
+                         th:errors="*{lastName}">
+                    </div>
+                </div>
+            </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input th:field="*{email}" type="email" class="form-control" id="email" name="email" >
+            <div class="w-100 mx-3 text-danger"
+                 th:if="${#fields.hasErrors('email')}"
+                 th:errors="*{email}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input th:field="*{phone}" type="tel" class="form-control" id="phone" name="phone">
+            <div class="w-100 mx-3 text-danger"
+                 th:if="${#fields.hasErrors('phone')}"
+                 th:errors="*{phone}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input th:field="*{password}" type="password" class="form-control" id="password" name="password">
+            <div class="w-100 mx-3 text-danger"
+                 th:if="${#fields.hasErrors('password')}"
+                 th:errors="*{password}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="re-password">Re-enter Password:</label>
+            <input type="password" class="form-control" id="re-password" name="rePassword">
+            <div class="w-100 mx-3 text-danger"
+                 th:if="${#fields.hasErrors('rePassword')}"
+                 th:errors="*{rePassword}">
+            </div>
+        </div>
+        <button href="/user/add"  type="submit" class="btn btn-primary btn-sm">Create Account</button>
+        </div>
+    </form>
+</div>
+</div>
+<script>
+    document.getElementById("createAccountForm").addEventListener("submit", function(event) {
+        const password = document.getElementById("password").value;
+        const rePassword = document.getElementById("re-password").value;
+
+        if (password !== rePassword) {
+            alert("Passwords do not match");
+            event.preventDefault();
+        }
+    });
+</script>
+</body>
+</html>

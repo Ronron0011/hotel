@@ -1,0 +1,12 @@
+.hotel_name {
+    display: flex;
+    justify-content: space-between;
+
+}
+.input{
+    border: 1px solid  rgba(216, 220, 219, .7);
+    border-radius: 8px;
+}
+.page-wrapper {
+    background-color: #f6f6f6;
+}

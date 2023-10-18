@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main}">
+<body>
+<div class="mt-4 ml-5" layout:fragment="content">
+    <div class="row justify-content-center">
+        <h3>Add Facility</h3>
+    </div>
+    <div class="row justify-content-center" sec:authorize="hasRole('HOTEL_ADMIN')">
+        <form class="w-50 ml-2" th:action="@{/facilities/add-facilities}" th:object="${facility}" method="post">
+            <div class="form-group row">
+                <div class="w-100 m-2">
+                    <label><b>Hotel Name</b></label>
+                    <input type="text" th:value="${hotel.hotelName}" name="hotelName" class="form-control" readonly>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="w-100 m-2">
+                    <label><b>Facilities</b> <span style="color: red">*</span></label>
+                    <select class="form-control select2" multiple="multiple" th:field="*{name}">
+                        <option th:each="df : ${defaultFacilities}" th:value="${df.name}" th:text="${df.name}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary w-100 m-2">Create</button>
+                <button type="reset" class="btn btn-secondary w-100 m-2">Reset</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="row justify-content-center">
+        <table class="table table-striped w-50">
+            <thead style="background-color: #009688; color: white; text-align: center">
+            <tr>
+                <th>Facilities</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="f:${facilityList}" class="text-center">
+                <td  th:utext="${f}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>404 HTML Template by Colorlib</title>
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Passion+One:900" rel="stylesheet">
+
+</head>
+<body>
+  <div>Error page</div>
+  <h2>Internal Server Error</h2>
+  <p>Oops,something went wrong.</p>
+  <a href="#" id="back">Go Back</a>
+  <script>
+      document.getElementById("back").addEventListener("click", function() {
+          // Xóa cookie
+          document.cookie = "jwtToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          window.location.href = "/";
+      });
+  </script>
+</body>
+</html>

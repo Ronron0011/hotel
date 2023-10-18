@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/main}">
+<body>
+<div class="mt-4 ml-5" layout:fragment="content">
+<div class="container">
+    <h2>Update Employee</h2>
+    <div sec:authorize="hasRole('ROLE_MASTER')">
+        <form id="updateUserForm" th:action="@{/user/edit}" method="post" th:object="${userDTO}">
+            <div class="form-group">
+                <input th:field="*{id}" type="hidden" class="form-control" id="id" name="id" required>
+            </div>
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input th:field="*{firstName}" type="text" class="form-control" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input th:field="*{lastName}" type="text" class="form-control" id="lastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input th:field="*{phone}" type="tel" class="form-control" id="phone" name="phone" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update User</button>
+        </form>
+    </div>
+    <div sec:authorize="hasRole('ROLE_HOTEL_ADMIN')">
+        <div class="col-7 border mt-5">
+        <form id="employeeUpdateForm" th:action="@{/hotel/update-employee(employee_id=${employee.id},hotel_id=${hotelId})}" method="post" th:object="${employee}">
+            <a th:href="@{/hotel/list-employee(hotel_id=${hotelId})}" >
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </a>
+            <div class="form-group">
+                <input th:field="*{id}" type="hidden" class="form-control" id="employee_id" name="id" required>
+            </div>
+            <div class="form-group">
+                <label for="employeeFirstName">First Name:</label>
+                <input th:field="*{firstName}" type="text" class="form-control" id="employeeFirstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="employeeLastName">Last Name:</label>
+                <input th:field="*{lastName}" type="text" class="form-control" id="employeeLastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="employeePhone">Phone Number:</label>
+                <input th:field="*{phone}" type="tel" class="form-control" id="employeePhone" name="phone" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm mb-3">Update Employee</button>
+        </form>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
